@@ -8,20 +8,26 @@
 
 /* Begin PBXBuildFile section */
 		0CDC96CD1FE621CD0035FAB6 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CDC96CC1FE621CD0035FAB6 /* AppDelegate.swift */; };
-		0CDC96CF1FE621CD0035FAB6 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CDC96CE1FE621CD0035FAB6 /* ViewController.swift */; };
+		0CDC96CF1FE621CD0035FAB6 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CDC96CE1FE621CD0035FAB6 /* HomeViewController.swift */; };
 		0CDC96D21FE621CD0035FAB6 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0CDC96D01FE621CD0035FAB6 /* Main.storyboard */; };
 		0CDC96D41FE621CD0035FAB6 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0CDC96D31FE621CD0035FAB6 /* Assets.xcassets */; };
 		0CDC96D71FE621CD0035FAB6 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0CDC96D51FE621CD0035FAB6 /* LaunchScreen.storyboard */; };
+		0CDC96DF1FE624CB0035FAB6 /* InstagramAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CDC96DE1FE624CB0035FAB6 /* InstagramAPI.swift */; };
+		0CDC96E41FE6D8120035FAB6 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CDC96E31FE6D8120035FAB6 /* User.swift */; };
+		0CDC96E81FE6F5BA0035FAB6 /* SearchResultsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CDC96E71FE6F5BA0035FAB6 /* SearchResultsTableViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		0CDC96C91FE621CD0035FAB6 /* insta-search.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "insta-search.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		0CDC96CC1FE621CD0035FAB6 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		0CDC96CE1FE621CD0035FAB6 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		0CDC96CE1FE621CD0035FAB6 /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		0CDC96D11FE621CD0035FAB6 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		0CDC96D31FE621CD0035FAB6 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		0CDC96D61FE621CD0035FAB6 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		0CDC96D81FE621CD0035FAB6 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		0CDC96DE1FE624CB0035FAB6 /* InstagramAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InstagramAPI.swift; sourceTree = "<group>"; };
+		0CDC96E31FE6D8120035FAB6 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
+		0CDC96E71FE6F5BA0035FAB6 /* SearchResultsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchResultsTableViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -54,14 +60,41 @@
 		0CDC96CB1FE621CD0035FAB6 /* insta-search */ = {
 			isa = PBXGroup;
 			children = (
+				0CDC96E61FE6F5930035FAB6 /* View Controllers */,
+				0CDC96E21FE6CEA10035FAB6 /* API */,
 				0CDC96CC1FE621CD0035FAB6 /* AppDelegate.swift */,
-				0CDC96CE1FE621CD0035FAB6 /* ViewController.swift */,
 				0CDC96D01FE621CD0035FAB6 /* Main.storyboard */,
 				0CDC96D31FE621CD0035FAB6 /* Assets.xcassets */,
 				0CDC96D51FE621CD0035FAB6 /* LaunchScreen.storyboard */,
 				0CDC96D81FE621CD0035FAB6 /* Info.plist */,
 			);
 			path = "insta-search";
+			sourceTree = "<group>";
+		};
+		0CDC96E21FE6CEA10035FAB6 /* API */ = {
+			isa = PBXGroup;
+			children = (
+				0CDC96E51FE6D81D0035FAB6 /* Model */,
+				0CDC96DE1FE624CB0035FAB6 /* InstagramAPI.swift */,
+			);
+			path = API;
+			sourceTree = "<group>";
+		};
+		0CDC96E51FE6D81D0035FAB6 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				0CDC96E31FE6D8120035FAB6 /* User.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		0CDC96E61FE6F5930035FAB6 /* View Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				0CDC96CE1FE621CD0035FAB6 /* HomeViewController.swift */,
+				0CDC96E71FE6F5BA0035FAB6 /* SearchResultsTableViewController.swift */,
+			);
+			path = "View Controllers";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -136,8 +169,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				0CDC96CF1FE621CD0035FAB6 /* ViewController.swift in Sources */,
+				0CDC96E41FE6D8120035FAB6 /* User.swift in Sources */,
+				0CDC96CF1FE621CD0035FAB6 /* HomeViewController.swift in Sources */,
+				0CDC96E81FE6F5BA0035FAB6 /* SearchResultsTableViewController.swift in Sources */,
 				0CDC96CD1FE621CD0035FAB6 /* AppDelegate.swift in Sources */,
+				0CDC96DF1FE624CB0035FAB6 /* InstagramAPI.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -281,7 +317,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "com.blainerothrock.insta-search";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -296,7 +332,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "com.blainerothrock.insta-search";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};
