@@ -16,12 +16,36 @@ class InstagramAPI {
     static let clientSecret:String = "cddd8808fd054de5a51173035c5ff69c"
     static let redirectURI:String = "http://localhost:5000/callback"
     static let callbackScheme:String = "instatag://"
-    static let scope:String = "basic"
+    static let scope:String = "public_content"
     
     static var shared = InstagramAPI()
     
     var token: String?
     var currentUser:User?
+    
+    init() {
+        let defaults = UserDefaults.standard
+        if let token = defaults.object(forKey: "token") as? String {
+            self.token = token
+        }
+        if let userData = defaults.object(forKey: "user") as? Data {
+            do {
+                let decoder = JSONDecoder()
+                let user = try decoder.decode(User.self, from: userData)
+                self.currentUser = user
+            } catch let error {
+                print("error retriving user from user defaults")
+            }
+        }
+    }
+    
+    func isLoggedIn() -> Bool {
+        let defaults = UserDefaults.standard
+        if let _ = defaults.object(forKey: "token") as? String {
+            return true
+        }
+        return false
+    }
     
     func getAuthSession(callback: @escaping (_ success:Bool, _ error: Error?) -> ()) -> SFAuthenticationSession {
         let completionHandler: SFAuthenticationSession.CompletionHandler = { (url, error) in
@@ -33,10 +57,15 @@ class InstagramAPI {
             let urlComponents = URLComponents(string: (url?.absoluteString)!)
             let oauthToken = urlComponents?.queryItems?.first(where: { $0.name == "token" })
             self.token = oauthToken!.value!
+        
+            let defaults = UserDefaults.standard
+            defaults.set(self.token!, forKey: "token")
+        
             self.getUser(callback: callback)
         }
         
-        let authURL = URL(string: "\(InstagramAPI.authURL)?client_id=\(InstagramAPI.clientId)&redirect_uri=\(InstagramAPI.redirectURI)&response_type=code&scope\(InstagramAPI.scope)&DEBUG=true")
+        let authURLString = "\(InstagramAPI.authURL)?client_id=\(InstagramAPI.clientId)&redirect_uri=\(InstagramAPI.redirectURI)&response_type=code&scope=\(InstagramAPI.scope)&DEBUG=true"
+        let authURL = URL(string: authURLString)
         
         return SFAuthenticationSession(url: authURL!, callbackURLScheme: InstagramAPI.callbackScheme, completionHandler: completionHandler)
     }
@@ -62,6 +91,10 @@ class InstagramAPI {
                     let decoder = JSONDecoder()
                     let user:User? = try decoder.decode(User.self, from: data!)
                     self.currentUser = user
+                    
+                    let defaults = UserDefaults.standard
+                    defaults.setValue(data, forKey: "user")
+                    
                     callback(true,nil)
                 } catch let error {
                     print(error)
@@ -70,6 +103,45 @@ class InstagramAPI {
             }
         }
         dataTask.resume()
+    }
+    
+    func getRecentMedia(_ tag:String, completeion: @escaping (_ success:Bool, _ media: [Media]?, _ error:Error?) -> ()) {
+        guard self.token != nil else {
+            completeion(false, nil, nil)
+            return
+        }
+        
+        let config = URLSessionConfiguration.default
+        let session = URLSession(configuration: config)
+        
+        let urlString = "\(InstagramAPI.apiBaseURL)/tags/\(tag)/media/recent?access_token=\(self.token!)"
+        let url = URL(string: urlString)!
+        
+        let dataTask = session.dataTask(with: url) { (data, response, error) in
+            if error != nil {
+                completeion(false, nil, error)
+            }
+            
+            if data != nil,
+                let res = response as? HTTPURLResponse,
+                res.statusCode == 200 {
+                
+                do {
+                    let decoder = JSONDecoder()
+                    let mediaResponse = try decoder.decode(MediaResponse.self, from: data!)
+                    completeion(true, mediaResponse.data, nil)
+                } catch let error {
+                    completeion(false, nil, error)
+                }
+            }
+        }
+        dataTask.resume()
+    }
+    
+    func logout() {
+        let defaults = UserDefaults.standard
+        defaults.removeObject(forKey: "token")
+        defaults.removeObject(forKey: "user")
     }
 }
 

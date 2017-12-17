@@ -9,43 +9,75 @@
 import UIKit
 
 class SearchResultsTableViewController: UITableViewController {
+    
+    var searchText:String?
+    var media:[Media]?
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        setup()
+        
+        loadResults()
 
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
 
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
         // self.navigationItem.rightBarButtonItem = self.editButtonItem
+        
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
+    
+    func setup() {
+        
+    }
+    
+    func loadResults() {
+        if let query = self.searchText {
+            InstagramAPI.shared.getRecentMedia(query, completeion: { (success, media, error) in
+                if success, error == nil {
+                    self.media = media
+                    DispatchQueue.main.async {
+                        self.tableView.reloadData()
+                    }
+                } else {
+                    print(error?.localizedDescription)
+                }
+            })
+        }
+    }
 
     // MARK: - Table view data source
 
     override func numberOfSections(in tableView: UITableView) -> Int {
         // #warning Incomplete implementation, return the number of sections
-        return 0
+        return 1
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
-        return 0
+        return media?.count ?? 0
     }
 
-    /*
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "reuseIdentifier", for: indexPath)
-
-        // Configure the cell...
-
+        let cell = tableView.dequeueReusableCell(withIdentifier: "MediaCell", for: indexPath) as! MediaTableViewCell
+        let media = self.media![indexPath.row]
+        
+        cell.lblTitle.text = media.caption.text
+        if let imageURL = media.images?.standardRes.url {
+            cell.img.loadImageUsingCache(withUrl: imageURL)
+        }
+        
         return cell
     }
-    */
+    
+    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 400
+    }
 
     /*
     // Override to support conditional editing of the table view.

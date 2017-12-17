@@ -125,13 +125,36 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" id="96T-Y7-KrO">
-                                <rect key="frame" x="0.0" y="28" width="375" height="44"/>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="MediaCell" rowHeight="317" id="96T-Y7-KrO" customClass="MediaTableViewCell" customModule="insta_search" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="28" width="375" height="317"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="96T-Y7-KrO" id="zMB-mR-RDx">
-                                    <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="316.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="749" image="placeholder" translatesAutoresizingMaskIntoConstraints="NO" id="chn-IV-rW3">
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="196"/>
+                                        </imageView>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DfF-5W-qsv">
+                                            <rect key="frame" x="16" y="246" width="42" height="20.5"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                            <nil key="textColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                    </subviews>
+                                    <constraints>
+                                        <constraint firstItem="DfF-5W-qsv" firstAttribute="top" secondItem="chn-IV-rW3" secondAttribute="bottom" constant="50" id="Nw6-Q3-CW1"/>
+                                        <constraint firstItem="chn-IV-rW3" firstAttribute="leading" secondItem="zMB-mR-RDx" secondAttribute="leading" id="dsp-rk-9hv"/>
+                                        <constraint firstItem="DfF-5W-qsv" firstAttribute="leading" secondItem="zMB-mR-RDx" secondAttribute="leading" constant="16" id="hmu-bv-lZG"/>
+                                        <constraint firstAttribute="bottom" secondItem="DfF-5W-qsv" secondAttribute="bottom" constant="50" id="i93-x9-EQn"/>
+                                        <constraint firstItem="chn-IV-rW3" firstAttribute="top" secondItem="zMB-mR-RDx" secondAttribute="top" id="kKT-cd-Q2W"/>
+                                        <constraint firstAttribute="trailing" secondItem="chn-IV-rW3" secondAttribute="trailing" id="zcB-BI-jhX"/>
+                                    </constraints>
                                 </tableViewCellContentView>
+                                <connections>
+                                    <outlet property="img" destination="chn-IV-rW3" id="jqd-vH-7yA"/>
+                                    <outlet property="lblTitle" destination="DfF-5W-qsv" id="7HT-9m-pqt"/>
+                                </connections>
                             </tableViewCell>
                         </prototypes>
                         <connections>
@@ -142,7 +165,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="nLb-Sk-Oxz" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1306" y="133"/>
+            <point key="canvasLocation" x="1304.8" y="132.68365817091455"/>
         </scene>
         <!--Auth View Controller-->
         <scene sceneID="qc5-69-AUS">
@@ -203,4 +226,7 @@
             <point key="canvasLocation" x="-318" y="133"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="placeholder" width="400" height="400"/>
+    </resources>
 </document>

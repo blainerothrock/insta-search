@@ -24,6 +24,11 @@ class HomeViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        if InstagramAPI.shared.isLoggedIn() {
+            self.user = InstagramAPI.shared.currentUser
+        }
+        
         setup()
     }
 
@@ -42,6 +47,8 @@ class HomeViewController: UIViewController {
             self.btnSearch.isHidden = false
             self.txtfSearchBar.isHidden = false
             self.lblTagSeach.isHidden = false
+            
+            self.lblSubheader.text = u.username
         } else {
             self.lblWelcome.text = "Welcome"
             self.btnAuth.setTitle("Login", for: .normal)
@@ -50,6 +57,8 @@ class HomeViewController: UIViewController {
             self.btnSearch.isHidden = true
             self.txtfSearchBar.isHidden = true
             self.lblTagSeach.isHidden = true
+            
+            self.lblSubheader.text = "Please Login to Search"
         }
     }
     
@@ -68,11 +77,18 @@ class HomeViewController: UIViewController {
             self.authSession?.start()
         } else {
             self.user = nil
+            InstagramAPI.shared.logout()
             self.setup()
         }
     }
     
     @IBAction func searchTouched(_ sender: Any) {
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if let dvc = segue.destination as? SearchResultsTableViewController {
+            dvc.searchText = txtfSearchBar.text
+        }
     }
     
 }
