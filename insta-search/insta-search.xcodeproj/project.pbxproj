@@ -22,6 +22,7 @@
 		0CDC96F41FE7175E0035FAB6 /* Caption.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CDC96F31FE7175E0035FAB6 /* Caption.swift */; };
 		0CDC96F71FE730300035FAB6 /* MediaTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CDC96F61FE730300035FAB6 /* MediaTableViewCell.swift */; };
 		0CDC96F91FE735C30035FAB6 /* UIImageView+ImageCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CDC96F81FE735C30035FAB6 /* UIImageView+ImageCache.swift */; };
+		0CDC96FC1FE74CC50035FAB6 /* Utility.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CDC96FB1FE74CC50035FAB6 /* Utility.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -42,6 +43,7 @@
 		0CDC96F31FE7175E0035FAB6 /* Caption.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Caption.swift; sourceTree = "<group>"; };
 		0CDC96F61FE730300035FAB6 /* MediaTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MediaTableViewCell.swift; sourceTree = "<group>"; };
 		0CDC96F81FE735C30035FAB6 /* UIImageView+ImageCache.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImageView+ImageCache.swift"; sourceTree = "<group>"; };
+		0CDC96FB1FE74CC50035FAB6 /* Utility.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utility.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -74,14 +76,13 @@
 		0CDC96CB1FE621CD0035FAB6 /* insta-search */ = {
 			isa = PBXGroup;
 			children = (
+				0CDC96FA1FE74C9E0035FAB6 /* Supporting Files */,
 				0CDC96E61FE6F5930035FAB6 /* View Controllers */,
 				0CDC96E21FE6CEA10035FAB6 /* API */,
 				0CDC96CC1FE621CD0035FAB6 /* AppDelegate.swift */,
 				0CDC96D01FE621CD0035FAB6 /* Main.storyboard */,
-				0CDC96D31FE621CD0035FAB6 /* Assets.xcassets */,
 				0CDC96D51FE621CD0035FAB6 /* LaunchScreen.storyboard */,
 				0CDC96D81FE621CD0035FAB6 /* Info.plist */,
-				0CDC96F81FE735C30035FAB6 /* UIImageView+ImageCache.swift */,
 			);
 			path = "insta-search";
 			sourceTree = "<group>";
@@ -124,6 +125,16 @@
 				0CDC96F61FE730300035FAB6 /* MediaTableViewCell.swift */,
 			);
 			path = Cells;
+			sourceTree = "<group>";
+		};
+		0CDC96FA1FE74C9E0035FAB6 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				0CDC96D31FE621CD0035FAB6 /* Assets.xcassets */,
+				0CDC96F81FE735C30035FAB6 /* UIImageView+ImageCache.swift */,
+				0CDC96FB1FE74CC50035FAB6 /* Utility.swift */,
+			);
+			path = "Supporting Files";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -205,6 +216,7 @@
 				0CDC96F41FE7175E0035FAB6 /* Caption.swift in Sources */,
 				0CDC96EE1FE715DA0035FAB6 /* VideoMeta.swift in Sources */,
 				0CDC96EA1FE6FDC70035FAB6 /* Media.swift in Sources */,
+				0CDC96FC1FE74CC50035FAB6 /* Utility.swift in Sources */,
 				0CDC96E81FE6F5BA0035FAB6 /* SearchResultsTableViewController.swift in Sources */,
 				0CDC96CD1FE621CD0035FAB6 /* AppDelegate.swift in Sources */,
 				0CDC96F91FE735C30035FAB6 /* UIImageView+ImageCache.swift in Sources */,

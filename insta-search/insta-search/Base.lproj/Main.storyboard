@@ -15,7 +15,7 @@
         </array>
     </customFonts>
     <scenes>
-        <!--Home View Controller-->
+        <!--InstaTag-->
         <scene sceneID="tne-QT-ifu">
             <objects>
                 <viewController id="BYZ-38-t0r" customClass="HomeViewController" customModule="insta_search" customModuleProvider="target" sceneMemberID="viewController">
@@ -24,15 +24,18 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Sac-NM-u8T">
-                                <rect key="frame" x="16" y="611" width="343" height="36"/>
+                                <rect key="frame" x="40" y="611" width="295" height="36"/>
                                 <color key="backgroundColor" red="0.22556614314834289" green="0.4821444306835827" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="36" id="hRo-zK-NFj"/>
+                                </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                 <state key="normal" title="_LOGOUT">
                                     <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
                                 </state>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
-                                        <integer key="value" value="10"/>
+                                        <integer key="value" value="18"/>
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                                 <connections>
@@ -53,7 +56,7 @@
                             </textField>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qXf-80-Sn6">
                                 <rect key="frame" x="266" y="389" width="93" height="30"/>
-                                <color key="backgroundColor" red="0.21867463922566621" green="0.49573144838765559" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <color key="backgroundColor" red="0.92549019607843142" green="0.36078431372549019" blue="0.43137254901960786" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="30" id="BIV-5n-lBm"/>
                                     <constraint firstAttribute="width" constant="93" id="zKL-xs-cT8"/>
@@ -62,6 +65,11 @@
                                 <state key="normal" title="Search">
                                     <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
                                 </state>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                        <integer key="value" value="15"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
                                 <connections>
                                     <action selector="searchTouched:" destination="BYZ-38-t0r" eventType="touchUpInside" id="o0p-Uo-zLt"/>
                                     <segue destination="2HA-uY-xRi" kind="show" identifier="searchResultsSegue" id="ECe-hf-0zN"/>
@@ -90,11 +98,11 @@
                             <constraint firstItem="MjT-l7-ZfL" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="16" id="VlM-1v-2bJ"/>
                             <constraint firstItem="eOv-YM-vvx" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="16" id="Wa5-mk-LfM"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="MjT-l7-ZfL" secondAttribute="trailing" constant="16" id="bwD-s3-ZvI"/>
-                            <constraint firstItem="Sac-NM-u8T" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="16" id="gdL-sr-TEY"/>
+                            <constraint firstItem="Sac-NM-u8T" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="40" id="gdL-sr-TEY"/>
                             <constraint firstItem="ijj-a3-Zqc" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="8" id="lTX-Ec-oQI"/>
                             <constraint firstItem="TbV-as-WQl" firstAttribute="top" secondItem="ijj-a3-Zqc" secondAttribute="bottom" constant="8" id="nNf-iz-S8X"/>
                             <constraint firstItem="MjT-l7-ZfL" firstAttribute="top" secondItem="eOv-YM-vvx" secondAttribute="bottom" constant="8" id="oqZ-4Y-JCV"/>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="Sac-NM-u8T" secondAttribute="trailing" constant="16" id="pz0-xb-rI0"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="Sac-NM-u8T" secondAttribute="trailing" constant="40" id="pz0-xb-rI0"/>
                             <constraint firstItem="ijj-a3-Zqc" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="21" id="qVl-79-SR1"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="ijj-a3-Zqc" secondAttribute="trailing" constant="8" id="siW-kh-zzM"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="Sac-NM-u8T" secondAttribute="bottom" constant="20" id="vhg-mO-Y6y"/>
@@ -102,7 +110,7 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
-                    <navigationItem key="navigationItem" id="BR9-Ak-93L"/>
+                    <navigationItem key="navigationItem" title="InstaTag" largeTitleDisplayMode="always" id="BR9-Ak-93L"/>
                     <connections>
                         <outlet property="btnAuth" destination="Sac-NM-u8T" id="cWC-Gh-OXv"/>
                         <outlet property="btnSearch" destination="qXf-80-Sn6" id="j4a-3E-iQ1"/>
@@ -215,6 +223,10 @@
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="i5s-mq-5Em">
                         <rect key="frame" x="0.0" y="20" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
+                        <color key="barTintColor" red="0.80784313725490198" green="0.73725490196078436" blue="0.70196078431372544" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <textAttributes key="titleTextAttributes">
+                            <fontDescription key="fontDescription" type="system" pointSize="0.0"/>
+                        </textAttributes>
                     </navigationBar>
                     <nil name="viewControllers"/>
                     <connections>

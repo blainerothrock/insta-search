@@ -38,11 +38,12 @@ class HomeViewController: UIViewController {
     }
     
     func setup() {
+        
         if let u = self.user {
             let firstName = u.fullName.split(separator: " ").first!
             self.lblWelcome.text = "Welcome, \(firstName)"
             self.btnAuth.setTitle("Logout", for: .normal)
-            self.btnAuth.backgroundColor = UIColor.red
+            self.btnAuth.backgroundColor = UIColor.john
             
             self.btnSearch.isHidden = false
             self.txtfSearchBar.isHidden = false
@@ -52,7 +53,7 @@ class HomeViewController: UIViewController {
         } else {
             self.lblWelcome.text = "Welcome"
             self.btnAuth.setTitle("Login", for: .normal)
-            self.btnAuth.backgroundColor = UIColor.green
+            self.btnAuth.backgroundColor = UIColor.lightPink
             
             self.btnSearch.isHidden = true
             self.txtfSearchBar.isHidden = true
