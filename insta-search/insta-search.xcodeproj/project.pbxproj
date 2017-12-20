@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0C46FAF41FEA1A5E00DA681D /* VideoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C46FAF31FEA1A5E00DA681D /* VideoView.swift */; };
 		0CDC96CD1FE621CD0035FAB6 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CDC96CC1FE621CD0035FAB6 /* AppDelegate.swift */; };
 		0CDC96CF1FE621CD0035FAB6 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CDC96CE1FE621CD0035FAB6 /* HomeViewController.swift */; };
 		0CDC96D21FE621CD0035FAB6 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0CDC96D01FE621CD0035FAB6 /* Main.storyboard */; };
@@ -26,6 +27,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		0C46FAF31FEA1A5E00DA681D /* VideoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoView.swift; sourceTree = "<group>"; };
 		0CDC96C91FE621CD0035FAB6 /* insta-search.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "insta-search.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		0CDC96CC1FE621CD0035FAB6 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		0CDC96CE1FE621CD0035FAB6 /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
@@ -133,6 +135,7 @@
 				0CDC96D31FE621CD0035FAB6 /* Assets.xcassets */,
 				0CDC96F81FE735C30035FAB6 /* UIImageView+ImageCache.swift */,
 				0CDC96FB1FE74CC50035FAB6 /* Utility.swift */,
+				0C46FAF31FEA1A5E00DA681D /* VideoView.swift */,
 			);
 			path = "Supporting Files";
 			sourceTree = "<group>";
@@ -217,6 +220,7 @@
 				0CDC96EE1FE715DA0035FAB6 /* VideoMeta.swift in Sources */,
 				0CDC96EA1FE6FDC70035FAB6 /* Media.swift in Sources */,
 				0CDC96FC1FE74CC50035FAB6 /* Utility.swift in Sources */,
+				0C46FAF41FEA1A5E00DA681D /* VideoView.swift in Sources */,
 				0CDC96E81FE6F5BA0035FAB6 /* SearchResultsTableViewController.swift in Sources */,
 				0CDC96CD1FE621CD0035FAB6 /* AppDelegate.swift in Sources */,
 				0CDC96F91FE735C30035FAB6 /* UIImageView+ImageCache.swift in Sources */,

@@ -19,6 +19,7 @@ class SearchResultsTableViewController: UITableViewController {
         
         if self.searchText?.isEmpty ?? true { self.isRecent = true }
         
+        
         setup()
         loadResults()
     }
@@ -34,9 +35,15 @@ class SearchResultsTableViewController: UITableViewController {
     
     func setup() {
         tableView.separatorStyle = .none
+        
+        self.refreshControl = UIRefreshControl()
+        self.refreshControl?.tintColor = UIColor.white
+        self.refreshControl?.addTarget(self, action: #selector(self.loadResults), for: .valueChanged)
+        tableView.addSubview(self.refreshControl!)
+        
     }
     
-    func loadResults() {
+    @objc func loadResults() {
         
         if self.isRecent {
             InstagramAPI.shared.getRecentMedia(completion: { (success, media, error) in
@@ -44,6 +51,7 @@ class SearchResultsTableViewController: UITableViewController {
                     self.media = media
                     DispatchQueue.main.async {
                         self.tableView.reloadData()
+                        self.refreshControl?.endRefreshing()
                     }
                 } else {
                     print(error?.localizedDescription)
@@ -55,6 +63,7 @@ class SearchResultsTableViewController: UITableViewController {
                     self.media = media
                     DispatchQueue.main.async {
                         self.tableView.reloadData()
+                        self.refreshControl?.endRefreshing()
                     }
                 } else {
                     print(error?.localizedDescription)
@@ -86,9 +95,23 @@ class SearchResultsTableViewController: UITableViewController {
                 let dateString = DateFormatter.localizedString(from: date, dateStyle: .full, timeStyle: .short)
                 cell.lblDate.text = "\(dateString)"
             }
-            if let imageURL = m.images?.standardRes?.url {
-                cell.img.loadImageUsingCache(withUrl: imageURL)
+            
+            cell.videoView.isHidden = true
+            cell.img.isHidden = false
+            cell.videoView.stop()
+            if m.type == "image" {
+                if let imageURL = m.images?.standardRes?.url {
+                    cell.img.loadImageUsingCache(withUrl: imageURL)
+                }
+            } else if m.type == "video" {
+                if let videoURL = m.videos?.standardRes?.url {
+                    cell.videoView.configure(url: videoURL)
+                    cell.img.isHidden = true
+                    cell.videoView.isHidden = false
+                    cell.videoView.play()
+                }
             }
+            
             if let userProfileImageURL = m.user?["profile_picture"] {
                 cell.imgUserImage.loadImageUsingCache(withUrl: userProfileImageURL)
             }
@@ -108,49 +131,23 @@ class SearchResultsTableViewController: UITableViewController {
         return self.view.bounds.height * 0.75
     }
 
-    /*
-    // Override to support conditional editing of the table view.
-    override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
-        // Return false if you do not want the specified item to be editable.
-        return true
+    override func scrollViewDidScroll(_ scrollView: UIScrollView) {
+//        super.scrollViewDidScroll(scrollView)
+        if scrollView == self.tableView {
+            for indexPath in self.tableView.indexPathsForVisibleRows as! [NSIndexPath] {
+                
+            }
+        }
     }
-    */
-
-    /*
-    // Override to support editing the table view.
-    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
-        if editingStyle == .delete {
-            // Delete the row from the data source
-            tableView.deleteRows(at: [indexPath], with: .fade)
-        } else if editingStyle == .insert {
-            // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-        }    
+    
+    func setCellImageOffset(cell:MediaTableViewCell, indexPath: NSIndexPath) {
+        let cellFrame = self.tableView.rectForRow(at: indexPath as IndexPath)
+        let cellFrameInTable = self.tableView.convert(cellFrame, to: self.tableView.superview)
+        let cellOffset = cellFrameInTable.origin.y + cellFrameInTable.size.height
+        var tableHeight = self.tableView.bounds.size.height + cellFrameInTable.size.height
+        var cellOffetFactor = cellOffset/tableHeight
+//        cell.img.imagecen
+        
     }
-    */
-
-    /*
-    // Override to support rearranging the table view.
-    override func tableView(_ tableView: UITableView, moveRowAt fromIndexPath: IndexPath, to: IndexPath) {
-
-    }
-    */
-
-    /*
-    // Override to support conditional rearranging of the table view.
-    override func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
-        // Return false if you do not want the item to be re-orderable.
-        return true
-    }
-    */
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
+    
 }

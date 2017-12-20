@@ -17,6 +17,7 @@ class MediaTableViewCell: UITableViewCell {
     @IBOutlet weak var lblLikeCount: UILabel!
     @IBOutlet weak var lblDate: UILabel!
     @IBOutlet weak var imgUserImage: UIImageView!
+    @IBOutlet weak var videoView: VideoView!
     
     override func awakeFromNib() {
         super.awakeFromNib()
