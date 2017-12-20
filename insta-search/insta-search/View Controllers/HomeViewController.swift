@@ -18,18 +18,29 @@ class HomeViewController: UIViewController {
     @IBOutlet weak var txtfSearchBar: UITextField!
     @IBOutlet weak var btnSearch: UIButton!
     @IBOutlet weak var lblSubheader: UILabel!
+    @IBOutlet weak var searchView: UIView!
     
     var authSession:SFAuthenticationSession?
     var user:User?
     
+//    override func viewWillAppear(_ animated: Bool) {
+//        super.viewWillAppear(animated)
+//        self.searchView.center.x -= self.view.bounds.width
+//    }
+//
+//    override func viewDidAppear(_ animated: Bool) {
+//        super.viewDidAppear(true)
+//        if self.user != nil { loginAnimation() }
+//    }
+    
+
     override func viewDidLoad() {
         super.viewDidLoad()
         
         if InstagramAPI.shared.isLoggedIn() {
             self.user = InstagramAPI.shared.currentUser
         }
-        
-        setup()
+        self.setup()
     }
 
     override func didReceiveMemoryWarning() {
@@ -45,9 +56,7 @@ class HomeViewController: UIViewController {
             self.btnAuth.setTitle("Logout", for: .normal)
             self.btnAuth.backgroundColor = UIColor.john
             
-            self.btnSearch.isHidden = false
-            self.txtfSearchBar.isHidden = false
-            self.lblTagSeach.isHidden = false
+            self.searchView.isHidden = false
             
             self.lblSubheader.text = u.username
         } else {
@@ -55,13 +64,27 @@ class HomeViewController: UIViewController {
             self.btnAuth.setTitle("Login", for: .normal)
             self.btnAuth.backgroundColor = UIColor.lightPink
             
-            self.btnSearch.isHidden = true
-            self.txtfSearchBar.isHidden = true
-            self.lblTagSeach.isHidden = true
+            self.searchView.isHidden = true
             
             self.lblSubheader.text = "Please Login to Search"
         }
     }
+    
+//    func logoutAnmiation() {
+//        UIView.animate(withDuration: 0.5, delay: 0.25, options: [.curveEaseIn], animations: {
+//            self.searchView.center.x = self.view.bounds.width * 2
+//        }) { (success) in
+//            // nil
+//        }
+//    }
+//
+//    func loginAnimation() {
+//        UIView.animate(withDuration: 0.5, delay: 0.25, options: [.curveEaseIn], animations: {
+//            self.searchView.center.x += self.view.bounds.width
+//        }) { (success) in
+//            //  nil
+//        }
+//    }
     
     @IBAction func loginTouched(_ sender: UIButton) {
         if self.user == nil {

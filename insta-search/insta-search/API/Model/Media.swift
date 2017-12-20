@@ -22,7 +22,7 @@ struct Media: Codable {
     var caption:Caption
     var likes:[String:Int]
     var link:String
-//    var user:User
+    var user:[String:String]
     var createdTime:String
     var images: ImageMeta?
     var videos: VideoMeta?
@@ -38,7 +38,7 @@ struct Media: Codable {
         case caption
         case likes
         case link
-//        case user
+        case user
         case createdTime = "created_time"
         case images
         case videos

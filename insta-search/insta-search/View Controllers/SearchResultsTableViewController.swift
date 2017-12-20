@@ -16,15 +16,11 @@ class SearchResultsTableViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setup()
-        
         loadResults()
-
-        // Uncomment the following line to preserve selection between presentations
-        // self.clearsSelectionOnViewWillAppear = false
-
-        // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-        // self.navigationItem.rightBarButtonItem = self.editButtonItem
-        
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        self.navigationItem.title = self.searchText
     }
 
     override func didReceiveMemoryWarning() {
@@ -33,7 +29,7 @@ class SearchResultsTableViewController: UITableViewController {
     }
     
     func setup() {
-        
+        tableView.separatorStyle = .none
     }
     
     func loadResults() {
@@ -60,23 +56,40 @@ class SearchResultsTableViewController: UITableViewController {
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
-        return media?.count ?? 0
+        return media?.count ?? 10
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "MediaCell", for: indexPath) as! MediaTableViewCell
-        let media = self.media![indexPath.row]
-        
-        cell.lblTitle.text = media.caption.text
-        if let imageURL = media.images?.standardRes.url {
-            cell.img.loadImageUsingCache(withUrl: imageURL)
+        if let m = self.media?[indexPath.row] {
+            cell.lblTitle.text = m.user["username"]
+            cell.txtvCaption.text = m.caption.text
+            cell.lblLikeCount.text = "\(m.likes["count"] ?? 0)"
+            if let epochTime = Double(m.createdTime) {
+                let date = Date(timeIntervalSince1970: epochTime)
+                let dateString = DateFormatter.localizedString(from: date, dateStyle: .full, timeStyle: .short)
+                cell.lblDate.text = "\(dateString)"
+            }
+            if let imageURL = m.images?.standardRes.url {
+                cell.img.loadImageUsingCache(withUrl: imageURL)
+            }
+            if let userProfileImageURL = m.user["profile_picture"] {
+                cell.imgUserImage.loadImageUsingCache(withUrl: userProfileImageURL)
+            }
+        } else {
+            // set up mock cell
+            cell.lblTitle.text = ""
+            cell.txtvCaption.text = ""
+            cell.lblLikeCount.text = "0"
+            cell.lblDate.text = ""
+
         }
         
         return cell
     }
     
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 400
+        return self.view.bounds.height * 0.75
     }
 
     /*
