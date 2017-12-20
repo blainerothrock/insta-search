@@ -9,7 +9,7 @@
 import Foundation
 
 struct MediaMetaDetail: Codable {
-    var url:String
-    var height:Int
-    var width:Int
+    var url:String?
+    var height:Int?
+    var width:Int?
 }

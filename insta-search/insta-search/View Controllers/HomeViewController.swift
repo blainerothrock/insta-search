@@ -23,17 +23,6 @@ class HomeViewController: UIViewController {
     var authSession:SFAuthenticationSession?
     var user:User?
     
-//    override func viewWillAppear(_ animated: Bool) {
-//        super.viewWillAppear(animated)
-//        self.searchView.center.x -= self.view.bounds.width
-//    }
-//
-//    override func viewDidAppear(_ animated: Bool) {
-//        super.viewDidAppear(true)
-//        if self.user != nil { loginAnimation() }
-//    }
-    
-
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -70,22 +59,6 @@ class HomeViewController: UIViewController {
         }
     }
     
-//    func logoutAnmiation() {
-//        UIView.animate(withDuration: 0.5, delay: 0.25, options: [.curveEaseIn], animations: {
-//            self.searchView.center.x = self.view.bounds.width * 2
-//        }) { (success) in
-//            // nil
-//        }
-//    }
-//
-//    func loginAnimation() {
-//        UIView.animate(withDuration: 0.5, delay: 0.25, options: [.curveEaseIn], animations: {
-//            self.searchView.center.x += self.view.bounds.width
-//        }) { (success) in
-//            //  nil
-//        }
-//    }
-    
     @IBAction func loginTouched(_ sender: UIButton) {
         if self.user == nil {
             self.authSession = InstagramAPI.shared.getAuthSession() { (success, error) in
@@ -106,14 +79,14 @@ class HomeViewController: UIViewController {
         }
     }
     
-    @IBAction func searchTouched(_ sender: Any) {
-    }
-    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let dvc = segue.destination as? SearchResultsTableViewController {
-            dvc.searchText = txtfSearchBar.text
+            if segue.identifier == "recentSegue" {
+                dvc.isRecent = true
+            } else if segue.identifier == "searchResultsSegue" {
+              dvc.searchText = self.txtfSearchBar.text
+            }
         }
     }
     
 }
-

@@ -38,7 +38,7 @@
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Welcome" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ijj-a3-Zqc">
-                                <rect key="frame" x="8" y="137" width="359" height="33"/>
+                                <rect key="frame" x="16" y="137" width="351" height="33"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="28"/>
                                 <color key="textColor" red="0.2627450980392157" green="0.23921568627450979" blue="0.24705882352941178" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
@@ -81,8 +81,27 @@
                                             </userDefinedRuntimeAttribute>
                                         </userDefinedRuntimeAttributes>
                                         <connections>
-                                            <action selector="searchTouched:" destination="BYZ-38-t0r" eventType="touchUpInside" id="o0p-Uo-zLt"/>
                                             <segue destination="2HA-uY-xRi" kind="show" identifier="searchResultsSegue" id="ECe-hf-0zN"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="azr-P9-9Xd">
+                                        <rect key="frame" x="135" y="94" width="100" height="30"/>
+                                        <color key="backgroundColor" red="0.26274509800000001" green="0.23921568630000001" blue="0.2470588235" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="30" id="QrT-pq-dkO"/>
+                                            <constraint firstAttribute="width" constant="100" id="lWD-ZU-dxm"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <state key="normal" title="Recent">
+                                            <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
+                                        </state>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                <integer key="value" value="15"/>
+                                            </userDefinedRuntimeAttribute>
+                                        </userDefinedRuntimeAttributes>
+                                        <connections>
+                                            <segue destination="2HA-uY-xRi" kind="show" identifier="recentSegue" id="c4F-Pc-fsf"/>
                                         </connections>
                                     </button>
                                 </subviews>
@@ -91,6 +110,8 @@
                                     <constraint firstItem="MjT-l7-ZfL" firstAttribute="leading" secondItem="djl-LU-G9F" secondAttribute="leading" id="2XA-Lp-q6C"/>
                                     <constraint firstAttribute="bottom" secondItem="qXf-80-Sn6" secondAttribute="bottom" constant="8" id="7kI-45-Aix"/>
                                     <constraint firstItem="eOv-YM-vvx" firstAttribute="leading" secondItem="djl-LU-G9F" secondAttribute="leading" id="EoT-3y-XQf"/>
+                                    <constraint firstItem="qXf-80-Sn6" firstAttribute="leading" secondItem="azr-P9-9Xd" secondAttribute="trailing" constant="8" id="Fii-ku-qaL"/>
+                                    <constraint firstItem="azr-P9-9Xd" firstAttribute="centerY" secondItem="qXf-80-Sn6" secondAttribute="centerY" id="PBq-Vy-APu"/>
                                     <constraint firstItem="MjT-l7-ZfL" firstAttribute="top" secondItem="eOv-YM-vvx" secondAttribute="bottom" constant="8" id="Ypv-K0-KcG"/>
                                     <constraint firstItem="eOv-YM-vvx" firstAttribute="top" secondItem="djl-LU-G9F" secondAttribute="top" constant="21" id="fYm-Oj-K58"/>
                                     <constraint firstAttribute="trailing" secondItem="MjT-l7-ZfL" secondAttribute="trailing" id="hd2-pi-0UL"/>
@@ -109,7 +130,7 @@
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="djl-LU-G9F" secondAttribute="trailing" constant="16" id="PzB-JB-Z0z"/>
                             <constraint firstItem="djl-LU-G9F" firstAttribute="centerY" secondItem="6Tk-OE-BBY" secondAttribute="centerY" id="f8f-Iv-Yj3"/>
                             <constraint firstItem="Sac-NM-u8T" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="40" id="gdL-sr-TEY"/>
-                            <constraint firstItem="ijj-a3-Zqc" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="8" id="lTX-Ec-oQI"/>
+                            <constraint firstItem="ijj-a3-Zqc" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="16" id="lTX-Ec-oQI"/>
                             <constraint firstItem="TbV-as-WQl" firstAttribute="top" secondItem="ijj-a3-Zqc" secondAttribute="bottom" constant="8" id="nNf-iz-S8X"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="Sac-NM-u8T" secondAttribute="trailing" constant="40" id="pz0-xb-rI0"/>
                             <constraint firstItem="ijj-a3-Zqc" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="21" id="qVl-79-SR1"/>
@@ -272,4 +293,7 @@
         <image name="placeholder" width="650" height="300"/>
         <image name="profilePlaceholder" width="48" height="48"/>
     </resources>
+    <inferredMetricsTieBreakers>
+        <segue reference="c4F-Pc-fsf"/>
+    </inferredMetricsTieBreakers>
 </document>

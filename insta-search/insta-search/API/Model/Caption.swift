@@ -10,10 +10,10 @@ import Foundation
 
 struct Caption: Codable {
     
-    var createdTime:String
-    var text:String
-    var from:[String:String]
-    var id:String
+    var createdTime:String?
+    var text:String?
+    var from:[String:String]?
+    var id:String?
     
     enum CodingKeys: String, CodingKey {
         case createdTime = "created_time"

@@ -11,8 +11,8 @@ import Foundation
 
 struct VideoMeta: Codable {
 
-    var lowRes:MediaMetaDetail
-    var standardRes:MediaMetaDetail
+    var lowRes:MediaMetaDetail?
+    var standardRes:MediaMetaDetail?
     
     enum CodingKeys: String, CodingKey {
         case lowRes = "low_resolution"

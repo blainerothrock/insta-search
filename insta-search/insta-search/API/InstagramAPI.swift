@@ -105,9 +105,9 @@ class InstagramAPI {
         dataTask.resume()
     }
     
-    func getRecentMedia(_ tag:String, completeion: @escaping (_ success:Bool, _ media: [Media]?, _ error:Error?) -> ()) {
+    func getMedia(for tag:String, completion: @escaping (_ success:Bool, _ media: [Media]?, _ error:Error?) -> ()) {
         guard self.token != nil else {
-            completeion(false, nil, nil)
+            completion(false, nil, nil)
             return
         }
         
@@ -119,7 +119,7 @@ class InstagramAPI {
         
         let dataTask = session.dataTask(with: url) { (data, response, error) in
             if error != nil {
-                completeion(false, nil, error)
+                completion(false, nil, error)
             }
             
             if data != nil,
@@ -129,9 +129,42 @@ class InstagramAPI {
                 do {
                     let decoder = JSONDecoder()
                     let mediaResponse = try decoder.decode(MediaResponse.self, from: data!)
-                    completeion(true, mediaResponse.data, nil)
+                    completion(true, mediaResponse.data, nil)
                 } catch let error {
-                    completeion(false, nil, error)
+                    completion(false, nil, error)
+                }
+            }
+        }
+        dataTask.resume()
+    }
+    
+    func getRecentMedia(completion: @escaping (_ success:Bool, _ media: [Media]?, _ error:Error?) -> ()) {
+        guard self.token != nil else {
+            completion(false, nil, nil)
+            return
+        }
+        
+        let config = URLSessionConfiguration.default
+        let session = URLSession(configuration: config)
+        
+        let urlString = "\(InstagramAPI.apiBaseURL)/users/self/media/recent?access_token=\(self.token!)"
+        let url = URL(string: urlString)!
+        
+        let dataTask = session.dataTask(with: url) { (data, response, error) in
+            if error != nil {
+                completion(false, nil, error)
+            }
+            
+            if data != nil,
+                let res = response as? HTTPURLResponse,
+                res.statusCode == 200 {
+                
+                do {
+                    let decoder = JSONDecoder()
+                    let mediaResponse = try decoder.decode(MediaResponse.self, from: data!)
+                    completion(true, mediaResponse.data, nil)
+                } catch let error {
+                    completion(false, nil, error)
                 }
             }
         }

@@ -11,16 +11,20 @@ import UIKit
 class SearchResultsTableViewController: UITableViewController {
     
     var searchText:String?
+    var isRecent = false
     var media:[Media]?
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        if self.searchText?.isEmpty ?? true { self.isRecent = true }
+        
         setup()
         loadResults()
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        self.navigationItem.title = self.searchText
+        self.navigationItem.title = self.isRecent ? "Recent" : self.searchText
     }
 
     override func didReceiveMemoryWarning() {
@@ -33,8 +37,20 @@ class SearchResultsTableViewController: UITableViewController {
     }
     
     func loadResults() {
-        if let query = self.searchText {
-            InstagramAPI.shared.getRecentMedia(query, completeion: { (success, media, error) in
+        
+        if self.isRecent {
+            InstagramAPI.shared.getRecentMedia(completion: { (success, media, error) in
+                if success, error == nil {
+                    self.media = media
+                    DispatchQueue.main.async {
+                        self.tableView.reloadData()
+                    }
+                } else {
+                    print(error?.localizedDescription)
+                }
+            })
+        } else if let query = self.searchText {
+            InstagramAPI.shared.getMedia(for: query, completion: { (success, media, error) in
                 if success, error == nil {
                     self.media = media
                     DispatchQueue.main.async {
@@ -62,18 +78,18 @@ class SearchResultsTableViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "MediaCell", for: indexPath) as! MediaTableViewCell
         if let m = self.media?[indexPath.row] {
-            cell.lblTitle.text = m.user["username"]
-            cell.txtvCaption.text = m.caption.text
-            cell.lblLikeCount.text = "\(m.likes["count"] ?? 0)"
-            if let epochTime = Double(m.createdTime) {
+            cell.lblTitle.text = m.user?["username"]
+            cell.txtvCaption.text = m.caption?.text
+            cell.lblLikeCount.text = "\(m.likes?["count"] ?? 0)"
+            if let timeString = m.createdTime, let epochTime = Double(timeString) {
                 let date = Date(timeIntervalSince1970: epochTime)
                 let dateString = DateFormatter.localizedString(from: date, dateStyle: .full, timeStyle: .short)
                 cell.lblDate.text = "\(dateString)"
             }
-            if let imageURL = m.images?.standardRes.url {
+            if let imageURL = m.images?.standardRes?.url {
                 cell.img.loadImageUsingCache(withUrl: imageURL)
             }
-            if let userProfileImageURL = m.user["profile_picture"] {
+            if let userProfileImageURL = m.user?["profile_picture"] {
                 cell.imgUserImage.loadImageUsingCache(withUrl: userProfileImageURL)
             }
         } else {

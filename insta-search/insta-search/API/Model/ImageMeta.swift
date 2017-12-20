@@ -10,9 +10,9 @@ import Foundation
 
 struct ImageMeta: Codable {
     
-    var standardRes: MediaMetaDetail
-    var lowRes: MediaMetaDetail
-    var thumbnail: MediaMetaDetail
+    var standardRes: MediaMetaDetail?
+    var lowRes: MediaMetaDetail?
+    var thumbnail: MediaMetaDetail?
     
     enum CodingKeys: String, CodingKey {
         case standardRes = "standard_resolution"

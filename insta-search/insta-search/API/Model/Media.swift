@@ -14,16 +14,16 @@ struct MediaResponse: Codable {
 
 struct Media: Codable {
     
-    var type:String
+    var type:String?
 //    var usersInPhoto:[String]
-    var filter:String
-    var tags:[String]
-    var comments:[String:Int]
-    var caption:Caption
-    var likes:[String:Int]
-    var link:String
-    var user:[String:String]
-    var createdTime:String
+    var filter:String?
+    var tags:[String]?
+    var comments:[String:Int]?
+    var caption:Caption?
+    var likes:[String:Int]?
+    var link:String?
+    var user:[String:String]?
+    var createdTime:String?
     var images: ImageMeta?
     var videos: VideoMeta?
     var id:String
