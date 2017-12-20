@@ -13,6 +13,9 @@ class SearchResultsTableViewController: UITableViewController {
     var searchText:String?
     var isRecent = false
     var media:[Media]?
+    var filteredMedia:[Media]?
+    
+    var searchController: UISearchController?
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -41,6 +44,14 @@ class SearchResultsTableViewController: UITableViewController {
         self.refreshControl?.addTarget(self, action: #selector(self.loadResults), for: .valueChanged)
         tableView.addSubview(self.refreshControl!)
         
+        self.searchController = UISearchController(searchResultsController: nil)
+        self.searchController?.searchResultsUpdater = self
+        self.searchController?.obscuresBackgroundDuringPresentation = false
+        self.searchController?.searchBar.placeholder = "Filter Captions..."
+        self.searchController?.searchBar.barStyle = .black
+        navigationItem.searchController = searchController
+        definesPresentationContext = true
+        
     }
     
     @objc func loadResults() {
@@ -49,6 +60,7 @@ class SearchResultsTableViewController: UITableViewController {
             InstagramAPI.shared.getRecentMedia(completion: { (success, media, error) in
                 if success, error == nil {
                     self.media = media
+                    self.filteredMedia = media
                     DispatchQueue.main.async {
                         self.tableView.reloadData()
                         self.refreshControl?.endRefreshing()
@@ -61,6 +73,7 @@ class SearchResultsTableViewController: UITableViewController {
             InstagramAPI.shared.getMedia(for: query, completion: { (success, media, error) in
                 if success, error == nil {
                     self.media = media
+                    self.filteredMedia = media
                     DispatchQueue.main.async {
                         self.tableView.reloadData()
                         self.refreshControl?.endRefreshing()
@@ -81,12 +94,12 @@ class SearchResultsTableViewController: UITableViewController {
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
-        return media?.count ?? 10
+        return filteredMedia?.count ?? 10
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "MediaCell", for: indexPath) as! MediaTableViewCell
-        if let m = self.media?[indexPath.row] {
+        if let m = self.filteredMedia?[indexPath.row] {
             cell.lblTitle.text = m.user?["username"]
             cell.txtvCaption.text = m.caption?.text
             cell.lblLikeCount.text = "\(m.likes?["count"] ?? 0)"
@@ -150,4 +163,30 @@ class SearchResultsTableViewController: UITableViewController {
         
     }
     
+}
+
+extension SearchResultsTableViewController: UISearchResultsUpdating {
+    
+    func filterIsEmpty() -> Bool {
+        return searchController?.searchBar.text?.isEmpty ?? true
+    }
+    
+    func filterContentForSearch(_ searchText: String) {
+        filteredMedia = media?.filter({ (m) -> Bool in
+            if let captionText = m.caption?.text?.lowercased() {
+                return captionText.contains(searchText.lowercased())
+            }
+            return false
+        })
+        tableView.reloadData()
+    }
+    
+    func updateSearchResults(for searchController: UISearchController) {
+        if filterIsEmpty() {
+            self.filteredMedia = self.media
+            tableView.reloadData()
+        } else if let searchText = searchController.searchBar.text {
+            self.filterContentForSearch(searchText)
+        }
+    }
 }
