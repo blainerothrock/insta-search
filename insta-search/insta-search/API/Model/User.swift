@@ -10,13 +10,13 @@ import Foundation
 
 struct User: Codable {
     
-    var id:String
-    var username:String
-    var fullName:String
-    var profileImage:String
-    var bio:String
-    var website:String
-    var counts: [String:Int]
+    var id:String?
+    var username:String?
+    var fullName:String?
+    var profileImage:String?
+    var bio:String?
+    var website:String?
+    var counts: [String:Int]?
     
     enum CodingKeys: String, CodingKey {
         case id

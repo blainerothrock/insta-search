@@ -16,6 +16,8 @@ class SearchResultsTableViewController: UITableViewController {
     var filteredMedia:[Media]?
     
     var searchController: UISearchController?
+    
+    let parallaxOffset:CGFloat = 20.0
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -149,7 +151,7 @@ class SearchResultsTableViewController: UITableViewController {
         if scrollView == self.tableView {
             self.tableView.indexPathsForVisibleRows?.forEach({ (indexPath) in
                 if let cell = self.tableView.cellForRow(at: indexPath) as? MediaTableViewCell {
-                    let yOffset = ((tableView.contentOffset.y - cell.frame.origin.y) / cell.imageHeight) * 25
+                    let yOffset = ((tableView.contentOffset.y - cell.frame.origin.y) / cell.imageHeight) * self.parallaxOffset
                     cell.setImgOffset(offset: CGPoint(x: 0.0, y: yOffset))
                 }
             })

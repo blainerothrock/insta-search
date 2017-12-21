@@ -9,8 +9,12 @@
 import UIKit
 import SafariServices
 
+enum HomeViewSegue:String {
+    case recent = "recentSegue"
+    case searchResult = "searchResultsSegue"
+}
+
 class HomeViewController: UIViewController {
-    
     
     @IBOutlet weak var lblWelcome: UILabel!
     @IBOutlet weak var btnAuth: UIButton!
@@ -42,8 +46,9 @@ class HomeViewController: UIViewController {
         self.txtfSearchBar.delegate = self
         
         if let u = self.user {
-            let firstName = u.fullName.split(separator: " ").first!
-            self.lblWelcome.text = "Welcome, \(firstName)"
+            if let firstName = u.fullName?.split(separator: " ").first {
+                    self.lblWelcome.text = "Welcome, \(firstName)"
+            }
             self.btnAuth.setTitle("Logout", for: .normal)
             self.btnAuth.backgroundColor = UIColor.john
             
@@ -83,9 +88,9 @@ class HomeViewController: UIViewController {
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let dvc = segue.destination as? SearchResultsTableViewController {
-            if segue.identifier == "recentSegue" {
+            if segue.identifier == HomeViewSegue.recent.rawValue {
                 dvc.isRecent = true
-            } else if segue.identifier == "searchResultsSegue" {
+            } else if segue.identifier == HomeViewSegue.searchResult.rawValue {
               dvc.searchText = self.txtfSearchBar.text
             }
         }
@@ -96,7 +101,7 @@ extension HomeViewController: UITextFieldDelegate {
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         if !(textField.text?.isEmpty ?? true) {
-            self.performSegue(withIdentifier: "searchResultsSegue", sender: nil)
+            self.performSegue(withIdentifier: HomeViewSegue.searchResult.rawValue, sender: nil)
         }
         return true
     }

@@ -52,5 +52,6 @@ class MediaTableViewCell: UITableViewCell {
     
     func setImgOffset(offset:CGPoint) {
         self.img.frame = self.img.bounds.offsetBy(dx: offset.x, dy: offset.y)
+        self.videoView.frame = self.videoView.bounds.offsetBy(dx: offset.x, dy: offset.y)
     }
 }

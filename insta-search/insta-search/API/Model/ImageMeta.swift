@@ -8,7 +8,7 @@
 
 import Foundation
 
-struct ImageMeta: Codable {
+struct ImageMeta: Codable, MediaMeta {
     
     var standardRes: MediaMetaDetail?
     var lowRes: MediaMetaDetail?

@@ -8,8 +8,12 @@
 
 import Foundation
 
+protocol MediaMeta {
+    var lowRes:MediaMetaDetail? { get set }
+    var standardRes:MediaMetaDetail? { get set }
+}
 
-struct VideoMeta: Codable {
+struct VideoMeta: Codable, MediaMeta {
 
     var lowRes:MediaMetaDetail?
     var standardRes:MediaMetaDetail?

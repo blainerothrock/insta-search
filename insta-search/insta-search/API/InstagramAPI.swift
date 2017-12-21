@@ -9,6 +9,11 @@
 import Foundation
 import SafariServices
 
+enum UserDefaultKeys:String {
+    case token = "token"
+    case user = "user"
+}
+
 class InstagramAPI {
     static let apiBaseURL:String = "https://api.instagram.com/v1"
     static let authURL:String = "https://api.instagram.com/oauth/authorize/"
@@ -25,23 +30,23 @@ class InstagramAPI {
     
     init() {
         let defaults = UserDefaults.standard
-        if let token = defaults.object(forKey: "token") as? String {
+        if let token = defaults.object(forKey: UserDefaultKeys.token.rawValue) as? String {
             self.token = token
         }
-        if let userData = defaults.object(forKey: "user") as? Data {
+        if let userData = defaults.object(forKey: UserDefaultKeys.user.rawValue) as? Data {
             do {
                 let decoder = JSONDecoder()
                 let user = try decoder.decode(User.self, from: userData)
                 self.currentUser = user
             } catch let error {
-                print("error retriving user from user defaults")
+                print("error retriving user from user defaults: \(error)")
             }
         }
     }
     
     func isLoggedIn() -> Bool {
         let defaults = UserDefaults.standard
-        if let _ = defaults.object(forKey: "token") as? String {
+        if let _ = defaults.object(forKey: UserDefaultKeys.token.rawValue) as? String {
             return true
         }
         return false
@@ -173,8 +178,8 @@ class InstagramAPI {
     
     func logout() {
         let defaults = UserDefaults.standard
-        defaults.removeObject(forKey: "token")
-        defaults.removeObject(forKey: "user")
+        defaults.removeObject(forKey: UserDefaultKeys.token.rawValue)
+        defaults.removeObject(forKey: UserDefaultKeys.user.rawValue)
     }
 }
 

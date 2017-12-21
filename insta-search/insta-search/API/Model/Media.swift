@@ -15,7 +15,6 @@ struct MediaResponse: Codable {
 struct Media: Codable {
     
     var type:String?
-//    var usersInPhoto:[String]
     var filter:String?
     var tags:[String]?
     var comments:[String:Int]?
@@ -27,11 +26,9 @@ struct Media: Codable {
     var images: ImageMeta?
     var videos: VideoMeta?
     var id:String
-//    var location: String
     
     enum CodingKeys: String, CodingKey {
         case type
-//        case usersInPhoto = "users_in_photo"
         case filter
         case tags
         case comments
@@ -43,7 +40,6 @@ struct Media: Codable {
         case images
         case videos
         case id
-//        case location
     }
     
 }
