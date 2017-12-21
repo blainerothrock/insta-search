@@ -2,17 +2,32 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
-    <key>CFBundleURLTypes</key>
-    <array>
-        <dict>
-            <key>CFBundleURLName</key>
-            <string>com.blainerothrock.instatag</string>
-            <key>CFBundleURLSchemes</key>
-            <array>
-                <string>instatag</string>
-            </array>
-        </dict>
-    </array>
+	<key>Instagram</key>
+	<dict>
+		<key>Instagram Scope</key>
+		<string>${Instagram_Scope}</string>
+		<key>Instagram Callback Scheme</key>
+		<string>${Instagram_Callback_Scheme}</string>
+		<key>Instagram API Base URL</key>
+		<string>${Instagram_API_Base_URL}</string>
+		<key>Instagram API Auth URL</key>
+		<string>${Instagram_API_Auth_URL}</string>
+		<key>Instagram Client Id</key>
+		<string>${Instagram_Client_Id}</string>
+		<key>Instagram Redirect URL</key>
+		<string>${Instagram_Redirect_URL}</string>
+	</dict>
+	<key>CFBundleURLTypes</key>
+	<array>
+		<dict>
+			<key>CFBundleURLName</key>
+			<string>com.blainerothrock.instatag</string>
+			<key>CFBundleURLSchemes</key>
+			<array>
+				<string>instatag</string>
+			</array>
+		</dict>
+	</array>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>$(DEVELOPMENT_LANGUAGE)</string>
 	<key>CFBundleDisplayName</key>

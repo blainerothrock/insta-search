@@ -14,21 +14,52 @@ enum UserDefaultKeys:String {
     case user = "user"
 }
 
+enum InstagramKey: String {
+    case baseURL = "Instagram API Base URL"
+    case authURL = "Instagram API Auth URL"
+    case clientId = "Instagram Client Id"
+    case redirectURL = "Instagram Redirect URL"
+    case callbackScheme = "Instagram Callback Scheme"
+    case scope = "Instagram Scope"
+}
+
 class InstagramAPI {
-    static let apiBaseURL:String = "https://api.instagram.com/v1"
-    static let authURL:String = "https://api.instagram.com/oauth/authorize/"
-    static let clientId:String = "7b867a5f5a9d4b7486e340e3d95bc8e1"
-    static let clientSecret:String = "cddd8808fd054de5a51173035c5ff69c"
-    static let redirectURI:String = "http://localhost:5000/callback"
-    static let callbackScheme:String = "instatag://"
-    static let scope:String = "public_content"
-    
     static var shared = InstagramAPI()
+    
+    var apiBaseURL:String! = ""
+    var authURL:String! = ""
+    var clientId:String! = ""
+    var redirectURI:String! = ""
+    var callbackScheme:String! = ""
+    var scope:String! = ""
     
     var token: String?
     var currentUser:User?
     
     init() {
+        
+        if let path = Bundle.main.path(forResource: "Info", ofType: "plist") {
+            if let resourceFileDictionary = NSDictionary(contentsOfFile: path) as? [String:Any] {
+                if let instagram = resourceFileDictionary["Instagram"] as? [String:String] {
+                    self.apiBaseURL = instagram[InstagramKey.baseURL.rawValue] ?? ""
+                    self.authURL = instagram[InstagramKey.authURL.rawValue] ?? ""
+                    self.clientId = instagram[InstagramKey.clientId.rawValue] ?? ""
+                    self.redirectURI = instagram[InstagramKey.redirectURL.rawValue] ?? ""
+                    self.callbackScheme = instagram[InstagramKey.callbackScheme.rawValue] ?? ""
+                    self.scope = instagram[InstagramKey.scope.rawValue] ?? ""
+                }
+            }
+        }
+        
+        guard !self.apiBaseURL.isEmpty,
+            !self.authURL.isEmpty,
+            !self.clientId.isEmpty,
+            !self.redirectURI.isEmpty,
+            !self.callbackScheme.isEmpty,
+            !self.scope.isEmpty else {
+                fatalError("Config not set")
+        }
+        
         let defaults = UserDefaults.standard
         if let token = defaults.object(forKey: UserDefaultKeys.token.rawValue) as? String {
             self.token = token
@@ -69,10 +100,10 @@ class InstagramAPI {
             self.getUser(callback: callback)
         }
         
-        let authURLString = "\(InstagramAPI.authURL)?client_id=\(InstagramAPI.clientId)&redirect_uri=\(InstagramAPI.redirectURI)&response_type=code&scope=\(InstagramAPI.scope)&DEBUG=true"
+        let authURLString = "\(self.authURL!)?client_id=\(self.clientId!)&redirect_uri=\(self.redirectURI!)&response_type=code&scope=\(self.scope!)&DEBUG=true"
         let authURL = URL(string: authURLString)
         
-        return SFAuthenticationSession(url: authURL!, callbackURLScheme: InstagramAPI.callbackScheme, completionHandler: completionHandler)
+        return SFAuthenticationSession(url: authURL!, callbackURLScheme: self.callbackScheme, completionHandler: completionHandler)
     }
     
     private func getUser(callback: @escaping (_ success:Bool, _ error: Error?) -> ()) {
@@ -81,7 +112,7 @@ class InstagramAPI {
         let config = URLSessionConfiguration.default
         let session = URLSession(configuration: config)
         
-        let urlString = "\(InstagramAPI.apiBaseURL)/users/self/?access_token=\(self.token!)"
+        let urlString = "\(self.apiBaseURL!)/users/self/?access_token=\(self.token!)"
         let url = URL(string: urlString)
         let dataTask = session.dataTask(with: url!) { (data, response, error) in
             if error != nil {
@@ -119,7 +150,7 @@ class InstagramAPI {
         let config = URLSessionConfiguration.default
         let session = URLSession(configuration: config)
         
-        let urlString = "\(InstagramAPI.apiBaseURL)/tags/\(tag)/media/recent?access_token=\(self.token!)"
+        let urlString = "\(self.apiBaseURL!)/tags/\(tag)/media/recent?access_token=\(self.token!)"
         let url = URL(string: urlString)!
         
         let dataTask = session.dataTask(with: url) { (data, response, error) in
@@ -152,7 +183,7 @@ class InstagramAPI {
         let config = URLSessionConfiguration.default
         let session = URLSession(configuration: config)
         
-        let urlString = "\(InstagramAPI.apiBaseURL)/users/self/media/recent?access_token=\(self.token!)"
+        let urlString = "\(self.apiBaseURL!)/users/self/media/recent?access_token=\(self.token!)"
         let url = URL(string: urlString)!
         
         let dataTask = session.dataTask(with: url) { (data, response, error) in

@@ -365,6 +365,12 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = CB37YY3653;
 				INFOPLIST_FILE = "insta-search/Info.plist";
+				Instagram_API_Auth_URL = "https://api.instagram.com/oauth/authorize/";
+				Instagram_API_Base_URL = "https://api.instagram.com/v1";
+				Instagram_Callback_Scheme = "instatag://";
+				Instagram_Client_Id = 7b867a5f5a9d4b7486e340e3d95bc8e1;
+				Instagram_Redirect_URL = "http://localhost:5000/callback";
+				Instagram_Scope = public_content;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.blainerothrock.insta-search";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -380,6 +386,12 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = CB37YY3653;
 				INFOPLIST_FILE = "insta-search/Info.plist";
+				Instagram_API_Auth_URL = "https://api.instagram.com/oauth/authorize/";
+				Instagram_API_Base_URL = "https://api.instagram.com/v1";
+				Instagram_Callback_Scheme = "instatag://";
+				Instagram_Client_Id = 7b867a5f5a9d4b7486e340e3d95bc8e1;
+				Instagram_Redirect_URL = "http://localhost:5000/callback";
+				Instagram_Scope = public_content;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.blainerothrock.insta-search";
 				PRODUCT_NAME = "$(TARGET_NAME)";
