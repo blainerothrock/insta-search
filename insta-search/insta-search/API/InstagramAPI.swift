@@ -19,7 +19,7 @@ class InstagramAPI {
     static let authURL:String = "https://api.instagram.com/oauth/authorize/"
     static let clientId:String = "7b867a5f5a9d4b7486e340e3d95bc8e1"
     static let clientSecret:String = "cddd8808fd054de5a51173035c5ff69c"
-    static let redirectURI:String = "http://192.168.86.106:5000/callback"
+    static let redirectURI:String = "http://localhost:5000/callback"
     static let callbackScheme:String = "instatag://"
     static let scope:String = "public_content"
     
