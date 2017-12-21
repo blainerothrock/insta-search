@@ -94,9 +94,9 @@ class SearchResultsTableViewController: UITableViewController {
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
-        return filteredMedia?.count ?? 10
+        return filteredMedia?.count ?? 5
     }
-
+    
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "MediaCell", for: indexPath) as! MediaTableViewCell
         if let m = self.filteredMedia?[indexPath.row] {
@@ -147,22 +147,14 @@ class SearchResultsTableViewController: UITableViewController {
     override func scrollViewDidScroll(_ scrollView: UIScrollView) {
 //        super.scrollViewDidScroll(scrollView)
         if scrollView == self.tableView {
-            for indexPath in self.tableView.indexPathsForVisibleRows as! [NSIndexPath] {
-                
-            }
+            self.tableView.indexPathsForVisibleRows?.forEach({ (indexPath) in
+                if let cell = self.tableView.cellForRow(at: indexPath) as? MediaTableViewCell {
+                    let yOffset = ((tableView.contentOffset.y - cell.frame.origin.y) / cell.imageHeight) * 25
+                    cell.setImgOffset(offset: CGPoint(x: 0.0, y: yOffset))
+                }
+            })
         }
     }
-    
-    func setCellImageOffset(cell:MediaTableViewCell, indexPath: NSIndexPath) {
-        let cellFrame = self.tableView.rectForRow(at: indexPath as IndexPath)
-        let cellFrameInTable = self.tableView.convert(cellFrame, to: self.tableView.superview)
-        let cellOffset = cellFrameInTable.origin.y + cellFrameInTable.size.height
-        var tableHeight = self.tableView.bounds.size.height + cellFrameInTable.size.height
-        var cellOffetFactor = cellOffset/tableHeight
-//        cell.img.imagecen
-        
-    }
-    
 }
 
 extension SearchResultsTableViewController: UISearchResultsUpdating {

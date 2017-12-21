@@ -24,6 +24,7 @@ class VideoView: UIView {
     func configure(url: String) {
         if let videoURL = URL(string: url) {
             player = AVPlayer(url: videoURL)
+            player?.isMuted = true
             playerLayer = AVPlayerLayer(player: player)
             playerLayer?.frame = bounds
             playerLayer?.videoGravity = AVLayerVideoGravity.resizeAspectFill

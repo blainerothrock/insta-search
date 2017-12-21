@@ -39,6 +39,8 @@ class HomeViewController: UIViewController {
     
     func setup() {
         
+        self.txtfSearchBar.delegate = self
+        
         if let u = self.user {
             let firstName = u.fullName.split(separator: " ").first!
             self.lblWelcome.text = "Welcome, \(firstName)"
@@ -87,6 +89,16 @@ class HomeViewController: UIViewController {
               dvc.searchText = self.txtfSearchBar.text
             }
         }
+    }
+}
+
+extension HomeViewController: UITextFieldDelegate {
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        if !(textField.text?.isEmpty ?? true) {
+            self.performSegue(withIdentifier: "searchResultsSegue", sender: nil)
+        }
+        return true
     }
     
 }
